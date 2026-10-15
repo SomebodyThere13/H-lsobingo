@@ -55,6 +55,11 @@ h1{
     user-select:none;
 }
 
+.cell:focus{
+    outline:3px solid rgba(0,124,46,0.9);
+    outline-offset:2px;
+}
+
 .beige{
     background:#ead2b2;
 }
@@ -129,15 +134,15 @@ button:hover{
 <span id="bingocount">0</span>
 </div>
 
-<div id="board" class="grid"></div>
+<div id="board" class="grid" aria-label="Hälsobingo-bricka"></div>
 
-<div id="message"></div>
+<div id="message" role="status" aria-live="polite"></div>
 
 <div class="footer">
 
 <p><strong>15 okt - 15 nov</strong> - Kryssa rutor. Har du kryssat alla rutor på en hel rad eller kolumn har du fått BINGO.</p>
 
-<button onclick="resetBoard()">
+<button id="resetButton">
 Återställ bingobricka
 </button>
 
@@ -204,20 +209,28 @@ try {
 }
 
 const board = document.getElementById("board");
+const countEl = document.getElementById("count");
+const bingoEl = document.getElementById("bingocount");
+const messageEl = document.getElementById("message");
+const resetButton = document.getElementById("resetButton");
 
 activities.forEach((item,index)=>{
 
     const div = document.createElement("div");
 
     div.className = `cell ${item[1]}`;
-    div.innerHTML = item[0];
+    // use textContent for safety
+    div.textContent = item[0];
+    div.setAttribute('tabindex','0');
+    div.setAttribute('role','button');
+    div.setAttribute('aria-pressed', checked.includes(index) ? 'true' : 'false');
+    div.dataset.index = index;
 
     if(checked.includes(index)){
         div.classList.add("completed");
     }
 
-    div.addEventListener("click",()=>{
-
+    function toggle(){
         div.classList.toggle("completed");
 
         if(div.classList.contains("completed")){
@@ -228,6 +241,8 @@ activities.forEach((item,index)=>{
             checked = checked.filter(v => v !== index);
         }
 
+        div.setAttribute('aria-pressed', div.classList.contains('completed') ? 'true' : 'false');
+
         try {
             localStorage.setItem(STORAGE_KEY, JSON.stringify(checked));
         } catch (error) {
@@ -235,7 +250,15 @@ activities.forEach((item,index)=>{
         }
 
         updateStats();
+    }
 
+    div.addEventListener("click", toggle);
+
+    div.addEventListener('keydown', (e) => {
+        if(e.key === 'Enter' || e.key === ' '){
+            e.preventDefault();
+            toggle();
+        }
     });
 
     board.appendChild(div);
@@ -244,7 +267,7 @@ activities.forEach((item,index)=>{
 
 function updateStats(){
 
-    document.getElementById("count").innerText = checked.length;
+    countEl.textContent = checked.length;
 
     checkBingo();
 
@@ -258,6 +281,7 @@ function checkBingo(){
 
     let bingoCount = 0;
 
+    // Check rows
     for(let row=0; row<6; row++){
 
         let complete = true;
@@ -284,6 +308,7 @@ function checkBingo(){
         }
     }
 
+    // Check columns
     for(let col=0; col<6; col++){
 
         let complete = true;
@@ -310,9 +335,9 @@ function checkBingo(){
         }
     }
 
-    document.getElementById("bingocount").innerText = bingoCount;
+    bingoEl.textContent = bingoCount;
 
-    document.getElementById("message").innerHTML = bingoCount > 0 ? "🎉 BINGO! 🎉" : "";
+    messageEl.textContent = bingoCount > 0 ? "🎉 BINGO! 🎉" : "";
 
 }
 
@@ -330,6 +355,8 @@ function resetBoard(){
     }
 
 }
+
+resetButton.addEventListener('click', resetBoard);
 
 updateStats();
 
