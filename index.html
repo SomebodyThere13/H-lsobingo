@@ -8,9 +8,24 @@
 
 <style>
 
+:root{
+    --bg:#ececec;
+    --panel:#f7f7f7;
+    --gold:#d9b178;
+    --green:#007c2e;
+    --green-dark:#005e22;
+    --success:#0b8d33;
+    --danger:#c01749;
+    --text:#222;
+    --shadow:0 8px 20px rgba(0,0,0,0.12);
+}
+
+*{box-sizing:border-box;}
+
 body{
     font-family: Arial, sans-serif;
-    background:#ececec;
+    background:var(--bg);
+    color:var(--text);
     margin:0;
     padding:20px;
 }
@@ -24,7 +39,76 @@ h1{
     text-align:center;
     font-size:54px;
     font-weight:400;
-    margin-bottom:25px;
+    margin-bottom:20px;
+}
+
+.profile-bar{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:15px;
+    background:var(--panel);
+    border:2px solid var(--gold);
+    border-radius:12px;
+    padding:12px 16px;
+    box-shadow:var(--shadow);
+}
+
+.profile-bar label{
+    font-size:18px;
+    font-weight:600;
+}
+
+.profile-select,
+.profile-input,
+button,
+.modal button{
+    font:inherit;
+}
+
+.profile-select,
+.profile-input{
+    border:2px solid var(--gold);
+    border-radius:8px;
+    padding:10px 12px;
+    font-size:16px;
+    min-width:180px;
+    background:#fff;
+}
+
+button,
+.modal button{
+    background:var(--green);
+    color:white;
+    border:none;
+    padding:12px 18px;
+    border-radius:8px;
+    cursor:pointer;
+    transition:background .2s ease;
+    font-size:16px;
+}
+
+button:hover,
+.modal button:hover{
+    background:var(--green-dark);
+}
+
+button.secondary{
+    background:#6c757d;
+}
+
+button.secondary:hover{
+    background:#565e66;
+}
+
+button.danger{
+    background:#b52d4b;
+}
+
+button.danger:hover{
+    background:#8d1d38;
 }
 
 .stats{
@@ -37,7 +121,8 @@ h1{
     display:grid;
     grid-template-columns:repeat(6,1fr);
     gap:0;
-    border:2px solid #d9b178;
+    border:2px solid var(--gold);
+    background:#fff;
 }
 
 .cell{
@@ -50,9 +135,10 @@ h1{
     font-size:18px;
     line-height:1.2;
     cursor:pointer;
-    border:2px solid #d9b178;
+    border:2px solid var(--gold);
     transition:.2s;
     user-select:none;
+    background:#fff;
 }
 
 .cell:focus{
@@ -60,22 +146,17 @@ h1{
     outline-offset:2px;
 }
 
-.beige{
-    background:#ead2b2;
-}
+.beige{background:#ead2b2;}
+.gray{background:#f4f4f4;}
 
-.gray{
-    background:#f4f4f4;
-}
-
-.completed{
-    border:6px solid #0b8d33 !important;
+.completed {
+    border:6px solid var(--success) !important;
     background:#ffffff !important;
     font-weight:bold;
 }
 
 .bingo{
-    border:6px solid #c01749 !important;
+    border:6px solid var(--danger) !important;
 }
 
 .footer{
@@ -83,39 +164,71 @@ h1{
     font-size:22px;
 }
 
-button{
-    background:#007c2e;
-    color:white;
-    border:none;
-    padding:12px 20px;
-    margin-top:20px;
-    cursor:pointer;
-    border-radius:8px;
-    font-size:16px;
-}
-
-button:hover{
-    background:#005e22;
-}
-
 #message{
     text-align:center;
-    color:#0b8d33;
+    color:var(--success);
     font-size:32px;
     font-weight:bold;
     margin-top:20px;
+    min-height:48px;
+}
+
+.modal-backdrop{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.45);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal-backdrop.visible{
+    display:flex;
+}
+
+.modal {
+    width:min(420px, 100%);
+    background:#fff;
+    border:2px solid var(--gold);
+    border-radius:12px;
+    box-shadow:var(--shadow);
+    padding:20px;
+}
+
+.modal h2{
+    margin-top:0;
+    margin-bottom:16px;
+    text-align:center;
+}
+
+.modal form{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.modal-actions{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    margin-top:8px;
 }
 
 @media(max-width:1200px){
+    .cell{font-size:14px;}
+    h1{font-size:32px;}
+}
 
-    .cell{
-        font-size:14px;
+@media(max-width:600px){
+    .profile-bar{
+        flex-direction:column;
     }
 
-    h1{
-        font-size:32px;
+    .profile-select,
+    .profile-input{
+        width:100%;
     }
-
 }
 
 </style>
@@ -125,6 +238,13 @@ button:hover{
 <div class="container">
 
 <h1>HÄLSOBINGO DETALJPLANERING 2026</h1>
+
+<div class="profile-bar" aria-label="Hantera profiler">
+    <label for="profileSelect">Profil:</label>
+    <select id="profileSelect" class="profile-select" aria-label="Välj profil"></select>
+    <button id="addProfileBtn" type="button">Ny profil</button>
+    <button id="deleteProfileBtn" type="button" class="danger">Radera profil</button>
+</div>
 
 <div class="stats">
 ✅ Klara aktiviteter:
@@ -142,12 +262,25 @@ button:hover{
 
 <p><strong>15 okt - 15 nov</strong> - Kryssa rutor. Har du kryssat alla rutor på en hel rad eller kolumn har du fått BINGO.</p>
 
-<button id="resetButton">
+<button id="resetButton" type="button">
 Återställ bingobricka
 </button>
 
 </div>
 
+</div>
+
+<div id="profileModal" class="modal-backdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="profileModalTitle">
+        <h2 id="profileModalTitle">Skapa ny profil</h2>
+        <form id="profileForm">
+            <input id="profileNameInput" class="profile-input" type="text" maxlength="40" placeholder="Skriv namn eller alias" aria-label="Profilnamn" required>
+            <div class="modal-actions">
+                <button type="button" class="secondary" id="cancelProfileBtn">Avbryt</button>
+                <button type="submit">Spara profil</button>
+            </div>
+        </form>
+    </div>
 </div>
 
 <script>
@@ -199,166 +332,305 @@ const activities = [
 ];
 
 const STORAGE_KEY = "detaljplanering_bingo";
-let checked = [];
+const PROFILES_KEY = "detaljplanering_profiles";
+const ACTIVE_PROFILE_KEY = "detaljplanering_active_profile";
 
-try {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    checked = stored ? JSON.parse(stored) : [];
-} catch (error) {
-    checked = [];
-}
+let profiles = [];
+let activeProfileId = null;
+let checked = [];
 
 const board = document.getElementById("board");
 const countEl = document.getElementById("count");
 const bingoEl = document.getElementById("bingocount");
 const messageEl = document.getElementById("message");
 const resetButton = document.getElementById("resetButton");
+const profileSelect = document.getElementById("profileSelect");
+const addProfileBtn = document.getElementById("addProfileBtn");
+const deleteProfileBtn = document.getElementById("deleteProfileBtn");
+const profileModal = document.getElementById("profileModal");
+const profileForm = document.getElementById("profileForm");
+const profileNameInput = document.getElementById("profileNameInput");
+const cancelProfileBtn = document.getElementById("cancelProfileBtn");
 
-activities.forEach((item,index)=>{
+function createProfileId(){
+    return `profile_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
+}
 
-    const div = document.createElement("div");
+function migrateLegacyBoard(){
+    try {
+        const legacy = localStorage.getItem(STORAGE_KEY);
+        if (!legacy) return [];
+        const parsed = JSON.parse(legacy);
+        return Array.isArray(parsed) ? parsed : [];
+    } catch (error) {
+        return [];
+    }
+}
 
-    div.className = `cell ${item[1]}`;
-    // use textContent for safety
-    div.textContent = item[0];
-    div.setAttribute('tabindex','0');
-    div.setAttribute('role','button');
-    div.setAttribute('aria-pressed', checked.includes(index) ? 'true' : 'false');
-    div.dataset.index = index;
-
-    if(checked.includes(index)){
-        div.classList.add("completed");
+function loadProfiles(){
+    try {
+        const rawProfiles = localStorage.getItem(PROFILES_KEY);
+        profiles = rawProfiles ? JSON.parse(rawProfiles) : [];
+    } catch (error) {
+        profiles = [];
     }
 
-    function toggle(){
-        div.classList.toggle("completed");
-
-        if(div.classList.contains("completed")){
-            if(!checked.includes(index)){
-                checked.push(index);
-            }
-        }else{
-            checked = checked.filter(v => v !== index);
-        }
-
-        div.setAttribute('aria-pressed', div.classList.contains('completed') ? 'true' : 'false');
-
-        try {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(checked));
-        } catch (error) {
-            // Ignore storage errors (e.g. privacy mode)
-        }
-
-        updateStats();
+    if (!Array.isArray(profiles) || profiles.length === 0) {
+        const legacy = migrateLegacyBoard();
+        const defaultProfile = {
+            id: createProfileId(),
+            name: "Min profil",
+            checked: legacy
+        };
+        profiles = [defaultProfile];
+        saveProfiles();
     }
 
-    div.addEventListener("click", toggle);
-
-    div.addEventListener('keydown', (e) => {
-        if(e.key === 'Enter' || e.key === ' '){
-            e.preventDefault();
-            toggle();
+    try {
+        const activeRaw = localStorage.getItem(ACTIVE_PROFILE_KEY);
+        if (activeRaw && profiles.some(profile => profile.id === activeRaw)) {
+            activeProfileId = activeRaw;
         }
+    } catch (error) {
+        activeProfileId = null;
+    }
+
+    if (!activeProfileId || !profiles.some(profile => profile.id === activeProfileId)) {
+        activeProfileId = profiles[0].id;
+    }
+
+    localStorage.setItem(ACTIVE_PROFILE_KEY, activeProfileId);
+    const activeProfile = getActiveProfile();
+    checked = Array.isArray(activeProfile.checked) ? activeProfile.checked : [];
+}
+
+function saveProfiles(){
+    try {
+        localStorage.setItem(PROFILES_KEY, JSON.stringify(profiles));
+    } catch (error) {
+        // Ignore storage errors
+    }
+}
+
+function getActiveProfile(){
+    return profiles.find(profile => profile.id === activeProfileId) || profiles[0];
+}
+
+function persistCurrentProfile(){
+    const activeProfile = getActiveProfile();
+    if (!activeProfile) return;
+    activeProfile.checked = Array.isArray(checked) ? checked : [];
+    saveProfiles();
+    try {
+        localStorage.setItem(ACTIVE_PROFILE_KEY, activeProfile.id);
+    } catch (error) {
+        // Ignore storage errors
+    }
+}
+
+function renderProfileSelector(){
+    profileSelect.innerHTML = "";
+
+    profiles.forEach(profile => {
+        const option = document.createElement("option");
+        option.value = profile.id;
+        option.textContent = profile.name;
+        if (profile.id === activeProfileId) {
+            option.selected = true;
+        }
+        profileSelect.appendChild(option);
     });
 
-    board.appendChild(div);
-
-});
+    deleteProfileBtn.disabled = profiles.length <= 1;
+}
 
 function updateStats(){
-
     countEl.textContent = checked.length;
-
     checkBingo();
-
+    persistCurrentProfile();
 }
 
 function checkBingo(){
-
     const cells = [...document.querySelectorAll(".cell")];
 
-    cells.forEach(c=>c.classList.remove("bingo"));
+    cells.forEach(cell => cell.classList.remove("bingo"));
 
     let bingoCount = 0;
 
-    // Check rows
-    for(let row=0; row<6; row++){
-
+    for (let row = 0; row < 6; row++) {
         let complete = true;
 
-        for(let col=0; col<6; col++){
-
-            const index = row*6 + col;
-
-            if(!cells[index].classList.contains("completed")){
+        for (let col = 0; col < 6; col++) {
+            const index = row * 6 + col;
+            if (!cells[index].classList.contains("completed")) {
                 complete = false;
             }
-
         }
 
-        if(complete){
-
+        if (complete) {
             bingoCount++;
-
-            for(let col=0; col<6; col++){
-
-                cells[row*6+col].classList.add("bingo");
-
+            for (let col = 0; col < 6; col++) {
+                cells[row * 6 + col].classList.add("bingo");
             }
         }
     }
 
-    // Check columns
-    for(let col=0; col<6; col++){
-
+    for (let col = 0; col < 6; col++) {
         let complete = true;
 
-        for(let row=0; row<6; row++){
-
-            const index = row*6 + col;
-
-            if(!cells[index].classList.contains("completed")){
+        for (let row = 0; row < 6; row++) {
+            const index = row * 6 + col;
+            if (!cells[index].classList.contains("completed")) {
                 complete = false;
             }
-
         }
 
-        if(complete){
-
+        if (complete) {
             bingoCount++;
-
-            for(let row=0; row<6; row++){
-
-                cells[row*6+col].classList.add("bingo");
-
+            for (let row = 0; row < 6; row++) {
+                cells[row * 6 + col].classList.add("bingo");
             }
         }
     }
 
     bingoEl.textContent = bingoCount;
-
     messageEl.textContent = bingoCount > 0 ? "🎉 BINGO! 🎉" : "";
+}
 
+function renderBoard(){
+    board.innerHTML = "";
+
+    activities.forEach((item, index) => {
+        const div = document.createElement("div");
+        div.className = `cell ${item[1]}`;
+        div.textContent = item[0];
+        div.setAttribute("tabindex", "0");
+        div.setAttribute("role", "button");
+        div.setAttribute("aria-pressed", checked.includes(index) ? "true" : "false");
+
+        if (checked.includes(index)) {
+            div.classList.add("completed");
+        }
+
+        const toggleCell = () => {
+            div.classList.toggle("completed");
+
+            if (div.classList.contains("completed")) {
+                if (!checked.includes(index)) {
+                    checked.push(index);
+                }
+            } else {
+                checked = checked.filter(value => value !== index);
+            }
+
+            div.setAttribute("aria-pressed", div.classList.contains("completed") ? "true" : "false");
+            updateStats();
+        };
+
+        div.addEventListener("click", toggleCell);
+        div.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                toggleCell();
+            }
+        });
+
+        board.appendChild(div);
+    });
+
+    checkBingo();
+    countEl.textContent = checked.length;
 }
 
 function resetBoard(){
-
-    if(confirm("Vill du återställa bingobrickan?")){
-
-        try {
-            localStorage.removeItem(STORAGE_KEY);
-        } catch (error) {
-            // Ignore storage errors
-        }
-
-        location.reload();
+    if (confirm("Vill du återställa den aktuella profilens bingobricka?")) {
+        checked = [];
+        renderBoard();
+        persistCurrentProfile();
     }
-
 }
 
-resetButton.addEventListener('click', resetBoard);
+function openProfileModal(){
+    profileModal.classList.add("visible");
+    profileModal.setAttribute("aria-hidden", "false");
+    profileNameInput.value = "";
+    profileNameInput.focus();
+}
 
-updateStats();
+function closeProfileModal(){
+    profileModal.classList.remove("visible");
+    profileModal.setAttribute("aria-hidden", "true");
+    profileForm.reset();
+}
+
+function addProfile(name){
+    const cleanedName = name.trim();
+    if (!cleanedName) {
+        profileNameInput.focus();
+        return;
+    }
+
+    const profile = {
+        id: createProfileId(),
+        name: cleanedName,
+        checked: []
+    };
+
+    profiles.push(profile);
+    activeProfileId = profile.id;
+    checked = [];
+    saveProfiles();
+    renderProfileSelector();
+    renderBoard();
+    closeProfileModal();
+}
+
+function deleteCurrentProfile(){
+    if (profiles.length <= 1) {
+        alert("Du måste ha minst en profil kvar.");
+        return;
+    }
+
+    const profileToDelete = getActiveProfile();
+    const confirmed = confirm(`Vill du radera profilen "${profileToDelete.name}"?`);
+    if (!confirmed) return;
+
+    profiles = profiles.filter(profile => profile.id !== profileToDelete.id);
+    activeProfileId = profiles[0].id;
+    checked = getActiveProfile().checked || [];
+    saveProfiles();
+    renderProfileSelector();
+    renderBoard();
+}
+
+profileSelect.addEventListener("change", (event) => {
+    activeProfileId = event.target.value;
+    const activeProfile = getActiveProfile();
+    checked = Array.isArray(activeProfile.checked) ? activeProfile.checked : [];
+    localStorage.setItem(ACTIVE_PROFILE_KEY, activeProfileId);
+    renderBoard();
+    renderProfileSelector();
+});
+
+addProfileBtn.addEventListener("click", openProfileModal);
+cancelProfileBtn.addEventListener("click", closeProfileModal);
+resetButton.addEventListener("click", resetBoard);
+deleteProfileBtn.addEventListener("click", deleteCurrentProfile);
+
+profileForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    addProfile(profileNameInput.value);
+});
+
+profileModal.addEventListener("click", (event) => {
+    if (event.target === profileModal) {
+        closeProfileModal();
+    }
+});
+
+loadProfiles();
+renderProfileSelector();
+renderBoard();
 
 </script>
 
