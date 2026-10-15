@@ -1,440 +1,333 @@
 <!DOCTYPE html>
-<html lang="sv" data-theme="autumn">
+<html lang="sv">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes, viewport-fit=cover" />
-    <meta name="theme-color" content="#fffdf7" />
-    <meta name="apple-mobile-web-app-title" content="Hälsobingo" />
-    <title>H&#xF6;stbingo p&#xE5; Lantm&#xE4;teri &#x2013; H&#xE4;lsobingo</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/site.css?v=IWG51eRJv1QRR-FrJ1raJcWRF1a3aeXrRLvt-GDNu64" />
-    <link rel="stylesheet" href="/css/board.css?v=vF1IhEyGAr086jnaJvpzvrsYaRCWqjVNuLFz0yC0EVI" />
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍂</text></svg>" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Hälsobingo Detaljplanering 2026</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    background:#ececec;
+    margin:0;
+    padding:20px;
+}
+
+.container{
+    max-width:1400px;
+    margin:auto;
+}
+
+h1{
+    text-align:center;
+    font-size:54px;
+    font-weight:400;
+    margin-bottom:25px;
+}
+
+.stats{
+    text-align:center;
+    font-size:20px;
+    margin-bottom:15px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:0;
+    border:2px solid #d9b178;
+}
+
+.cell{
+    aspect-ratio:1/1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:12px;
+    font-size:18px;
+    line-height:1.2;
+    cursor:pointer;
+    border:2px solid #d9b178;
+    transition:.2s;
+    user-select:none;
+}
+
+.beige{
+    background:#ead2b2;
+}
+
+.gray{
+    background:#f4f4f4;
+}
+
+.completed{
+    border:6px solid #0b8d33 !important;
+    background:#ffffff !important;
+    font-weight:bold;
+}
+
+.bingo{
+    border:6px solid #c01749 !important;
+}
+
+.footer{
+    margin-top:20px;
+    font-size:22px;
+}
+
+button{
+    background:#007c2e;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    margin-top:20px;
+    cursor:pointer;
+    border-radius:8px;
+    font-size:16px;
+}
+
+button:hover{
+    background:#005e22;
+}
+
+#message{
+    text-align:center;
+    color:#0b8d33;
+    font-size:32px;
+    font-weight:bold;
+    margin-top:20px;
+}
+
+@media(max-width:1200px){
+
+    .cell{
+        font-size:14px;
+    }
+
+    h1{
+        font-size:32px;
+    }
+
+}
+
+</style>
 </head>
 <body>
-    <header class="site-header">
-        <a class="brand" href="/">
-            <span class="brand-leaf" aria-hidden="true">🍂</span>
-            <span>Hälsobingo</span>
-        </a>
-        <nav class="site-nav">
-                <a class="nav-link" title="Förslag eller bugg? Tyck till" aria-label="Tyck till" href="/tyck-till?from=%2Fb%2Fhostbingo-pa-lantmateri">💬<span class="nav-text"> Tyck till</span></a>
-                <a class="nav-link" href="/profil">
-                    <span class="nav-name">Tania</span>
-                </a>
-                <form method="post" class="inline-form" action="/logga-ut">
-                    <button type="submit" class="nav-link nav-button">Logga ut</button>
-                <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GYGo7TMZf5Pt3XlFY2a1iXsGoWgkA966RcIaj4c82PTs_qroJEWKhoV30rKElMIFQvCeqhkPce3v517bObY8sfMJOIolbnbE8_ubInUeMZQwKkcaaQf9Mpro2Z2KamQocQF9Mb0Dr-XvcDUtdYCitFyepXIqcivZmut2NZTUW3L-thGvCMBgwvC-JQcyGcuCg" /></form>
-        </nav>
-    </header>
 
-    <main class="site-main">
-        
-        
-<div class="board-page" data-slug="hostbingo-pa-lantmateri" data-sound="false">
-    <header class="board-header">
-        <div>
-            <h1 class="board-title">H&#xF6;stbingo p&#xE5; Lantm&#xE4;teri</h1>
-            <p class="muted">
-                21 sep. – 14 okt. 2026
-                    <span aria-hidden="true">·</span>
-                    <span>avslutad</span>
-            </p>
-        </div>
-        <nav class="board-links">
-            <a class="button button-ghost" href="/b/hostbingo-pa-lantmateri/leaderboard">🏆 Topplista</a>
-                <a class="button button-ghost" href="/b/hostbingo-pa-lantmateri/flode">Flöde</a>
-        </nav>
-    </header>
+<div class="container">
 
+<h1>HÄLSOBINGO DETALJPLANERING 2026</h1>
 
-
-    <div id="board-area">
-        <section class="scoreboard" aria-label="Ditt läge">
-    <div class="score">
-        <span class="score-value" id="score-points">25</span>
-        <span class="score-label">poäng</span>
-    </div>
-    <div class="score">
-        <span class="score-value">25<span class="score-of">/36</span></span>
-        <span class="score-label">rutor</span>
-    </div>
-    <div class="score">
-        <span class="score-value">0</span>
-        <span class="score-label">bingo</span>
-    </div>
-    <div class="score">
-        <span class="score-value"> 0</span>
-        <span class="score-label">dagar i rad</span>
-    </div>
-    <div class="score badges" aria-label="Märken">
-            <span class="badge" title="Först ut i teamet">🥇</span>
-            <span class="badge" title="Halva brickan">🌓</span>
-    </div>
-</section>
-
-<progress class="board-progress" value="69" max="100" aria-label="69 procent av brickan">69 %</progress>
-
-
-<div class="board-scroll">
-<div class="board-grid cols-6 " data-rows="6" data-cols="6" role="grid" aria-label="Bingobrickan">
-        <div class="cell slot-0" data-position="0" role="gridcell">
-            <form method="post" class="cell-form" data-position="0" action="/b/hostbingo-pa-lantmateri/square/4e186a17-d27f-46a9-8177-1828d5783179/complete">
-                <button type="submit" class="cell-button" disabled aria-pressed="false">
-                    <span class="cell-text">Tagit ett h&#xF6;stbad och/eller badat bastu</span>
-                </button>
-            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GYGo7TMZf5Pt3XlFY2a1iXsGoWgkA966RcIaj4c82PTs_qroJEWKhoV30rKElMIFQvCeqhkPce3v517bObY8sfMJOIolbnbE8_ubInUeMZQwKkcaaQf9Mpro2Z2KamQocQF9Mb0Dr-XvcDUtdYCitFyepXIqcivZmut2NZTUW3L-thGvCMBgwvC-JQcyGcuCg" /></form>
-
-        </div>
-        <div class="cell slot-1 done" data-position="1" role="gridcell">
-            <form method="post" class="cell-form" data-position="1" action="/b/hostbingo-pa-lantmateri/square/fbea28c4-97ad-4682-b6cb-c9d4cae6a60d/complete">
-                <button type="submit" class="cell-button" disabled aria-pressed="true">
-                    <span class="cell-text">Unnat mig sj&#xE4;lv en massage</span>
-                        <span class="stamp" aria-label="Avklarad">✔ Klart</span>
-                </button>
-            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GYGo7TMZf5Pt3XlFY2a1iXsGoWgkA966RcIaj4c82PTs_qroJEWKhoV30rKElMIFQvCeqhkPce3v517bObY8sfMJOIolbnbE8_ubInUeMZQwKkcaaQf9Mpro2Z2KamQocQF9Mb0Dr-XvcDUtdYCitFyepXIqcivZmut2NZTUW3L-thGvCMBgwvC-JQcyGcuCg" /></form>
-
-        </div>
-        <div class="cell slot-0" data-position="2" role="gridcell">
-            <form method="post" class="cell-form" data-position="2" action="/b/hostbingo-pa-lantmateri/square/0a0750c2-77ea-4ef7-9203-5a0bef5f35e4/complete">
-                <button type="submit" class="cell-button" disabled aria-pressed="false">
-                    <span class="cell-text">Utf&#xF6;rt handarbete/snickrat/meckat</span>
-                </button>
-            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GYGo7TMZf5Pt3XlFY2a1iXsGoWgkA966RcIaj4c82PTs_qroJEWKhoV30rKElMIFQvCeqhkPce3v517bObY8sfMJOIolbnbE8_ubInUeMZQwKkcaaQf9Mpro2Z2KamQocQF9Mb0Dr-XvcDUtdYCitFyepXIqcivZmut2NZTUW3L-thGvCMBgwvC-JQcyGcuCg" /></form>
-
-        </div>
-        <div class="cell slot-1 done" data-position="3" role="gridcell">
-            <form method="post" class="cell-form" data-position="3" action="/b/hostbingo-pa-lantmateri/square/5ffc051c-85f4-4800-aa45-f9941e69b475/complete">
-                <button type="submit" class="cell-button" disabled aria-pressed="true">
-                    <span class="cell-text">Ut&#xF6;vat yoga eller annan meditativ tr&#xE4;ning (minst 20 min)</span>
-                        <span class="stamp" aria-label="Avklarad">✔ Klart</span>
-                </button>
-            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GYGo7TMZf5Pt3XlFY2a1iXsGoWgkA966RcIaj4c82PTs_qroJEWKhoV30rKElMIFQvCeqhkPce3v517bObY8sfMJOIolbnbE8_ubInUeMZQwKkcaaQf9Mpro2Z2KamQocQF9Mb0Dr-XvcDUtdYCitFyepXIqcivZmut2NZTUW3L-thGvCMBgwvC-JQcyGcuCg" /></form>
-
-        </div>
-        <div class="cell slot-0 done counter" data-position="4" role="gridcell">
-            <form method="post" class="cell-form" data-position="4" action="/b/hostbingo-pa-lantmateri/square/3c530fbf-dc71-4601-9e3b-32c838a69aa3/complete">
-                <button type="submit" class="cell-button" disabled aria-pressed="true">
-                    <span class="cell-text">Tr&#xE4;na minst 2 ggr per vecka under hela perioden</span>
-                        <span class="cell-count">8/8</span>
-                        <progress class="cell-progress" value="8" max="8" aria-hidden="true"></progress>
-                        <span class="stamp" aria-label="Avklarad">✔ Klart</span>
-                </button>
-            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GYGo7TMZf5Pt3XlFY2a1iXsGoWgkA966RcIaj4c82PTs_qroJEWKhoV30rKElMIFQvCeqhkPce3v517bObY8sfMJOIolbnbE8_ubInUeMZQwKkcaaQf9Mpro2Z2KamQocQF9Mb0Dr-XvcDUtdYCitFyepXIqcivZmut2NZTUW3L-thGvCMBgwvC-JQcyGcuCg" /></form>
-
-                <details class="cell-menu">
-                    <summary aria-label="Fler val för rutan">…</summary>
-                    <div class="cell-menu-panel">
-                        <strong class="cell-menu-title">Tr&#xE4;na minst 2 ggr per vecka under hela perioden</strong>
-                            <p class="muted small">8 pass = 2 ggr/vecka i 4 veckor</p>
-                    </div>
-                </details>
-        </div>
-        <div class="cell slot-1 done" data-position="5" role="gridcell">
-            <form method="post" class="cell-form" data-position="5" action="/b/hostbingo-pa-lantmateri/square/7c368c6b-90fc-4353-996c-3c598e636266/complete">
-                <button type="submit" class="cell-button" disabled aria-pressed="true">
-                    <span class="cell-text">Tagit en lunchpromenad</span>
-                        <span class="stamp" aria-label="Avklarad">✔ Klart</span>
-                </button>
-            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GYGo7TMZf5Pt3XlFY2a1iXsGoWgkA966RcIaj4c82PTs_qroJEWKhoV30rKElMIFQvCeqhkPce3v517bObY8sfMJOIolbnbE8_ubInUeMZQwKkcaaQf9Mpro2Z2KamQocQF9Mb0Dr-XvcDUtdYCitFyepXIqcivZmut2NZTUW3L-thGvCMBgwvC-JQcyGcuCg" /></form>
-
-        </div>
-        <div class="cell slot-1 done" data-position="6" role="gridcell">
-            <form method="post" class="cell-form" data-position="6" action="/b/hostbingo-pa-lantmateri/square/53e53333-bd5d-4ece-bb0f-dab403901826/complete">
-                <button type="submit" class="cell-button" disabled aria-pressed="true">
-                    <span class="cell-text">L&#xF6;st korsord, sudoku eller annan klurighet</span>
-                        <span class="stamp" aria-label="Avklarad">✔ Klart</span>
-                </button>
-            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GYGo7TMZf5Pt3XlFY2a1iXsGoWgkA966RcIaj4c82PTs_qroJEWKhoV30rKElMIFQvCeqhkPce3v517bObY8sfMJOIolbnbE8_ubInUeMZQwKkcaaQf9Mpro2Z2KamQocQF9Mb0Dr-XvcDUtdYCitFyepXIqcivZmut2NZTUW3L-thGvCMBgwvC-JQcyGcuCg" /></form>
-
-        </div>
-        <div class="cell slot-0" data-position="7" role="gridcell">
-            <form method="post" class="cell-form" data-position="7" action="/b/hostbingo-pa-lantmateri/square/078ab5cc-3b4b-435d-b03c-afb812abe523/complete">
-                <button type="submit" class="cell-button" disabled aria-pressed="false">
-                    <span class="cell-text">Ringt/tr&#xE4;ffat en gammal v&#xE4;n</span>
-                </button>
-            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GYGo7TMZf5Pt3XlFY2a1iXsGoWgkA966RcIaj4c82PTs_qroJEWKhoV30rKElMIFQvCeqhkPce3v517bObY8sfMJOIolbnbE8_ubInUeMZQwKkcaaQf9Mpro2Z2KamQocQF9Mb0Dr-XvcDUtdYCitFyepXIqcivZmut2NZTUW3L-thGvCMBgwvC-JQcyGcuCg" /></form>
-
-        </div>
-        <div class="cell slot-1 done" data-position="8" role="gridcell">
-            <form method="post" class="cell-form" data-position="8" action="/b/hostbingo-pa-lantmateri/square/0c1c532e-7c1c-4770-a46a-a21e34c5f7e1/complete">
-                <button type="submit" class="cell-button" disabled aria-pressed="true">
-                    <span class="cell-text">K&#xE4;nt mig stolt &#xF6;ver mig sj&#xE4;lv</span>
-                        <span class="stamp" aria-label="Avklarad">✔ Klart</span>
-                </button>
-            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GYGo7TMZf5Pt3XlFY2a1iXsGoWgkA966RcIaj4c82PTs_qroJEWKhoV30rKElMIFQvCeqhkPce3v517bObY8sfMJOIolbnbE8_ubInUeMZQwKkcaaQf9Mpro2Z2KamQocQF9Mb0Dr-XvcDUtdYCitFyepXIqcivZmut2NZTUW3L-thGvCMBgwvC-JQcyGcuCg" /></form>
-
-        </div>
-        <div class="cell slot-0 done" data-position="9" role="gridcell">
-            <form method="post" class="cell-form" data-position="9" action="/b/hostbingo-pa-lantmateri/square/dba76249-9513-4dad-b60e-6c15371ca42b/complete">
-                <button type="submit" class="cell-button" disabled aria-pressed="true">
-                    <span class="cell-text">Tagit en l&#xE5;ng promenad (minst 60 min)</span>
-                        <span class="stamp" aria-label="Avklarad">✔ Klart</span>
-                </button>
-            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GYGo7TMZf5Pt3XlFY2a1iXsGoWgkA966RcIaj4c82PTs_qroJEWKhoV30rKElMIFQvCeqhkPce3v517bObY8sfMJOIolbnbE8_ubInUeMZQwKkcaaQf9Mpro2Z2KamQocQF9Mb0Dr-XvcDUtdYCitFyepXIqcivZmut2NZTUW3L-thGvCMBgwvC-JQcyGcuCg" /></form>
-
-        </div>
-        <div class="cell slot-1 done" data-position="10" role="gridcell">
-            <form method="post" class="cell-form" data-position="10" action="/b/hostbingo-pa-lantmateri/square/be2845fd-3be6-4f75-8f35-423381152e56/complete">
-                <button type="submit" class="cell-button" disabled aria-pressed="true">
-                    <span class="cell-text">L&#xE4;st/lyssnat p&#xE5; en bok</span>
-                        <span class="stamp" aria-label="Avklarad">✔ Klart</span>
-                </button>
-            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GYGo7TMZf5Pt3XlFY2a1iXsGoWgkA966RcIaj4c82PTs_qroJEWKhoV30rKElMIFQvCeqhkPce3v517bObY8sfMJOIolbnbE8_ubInUeMZQwKkcaaQf9Mpro2Z2KamQocQF9Mb0Dr-XvcDUtdYCitFyepXIqcivZmut2NZTUW3L-thGvCMBgwvC-JQcyGcuCg" /></form>
-
-        </div>
-        <div class="cell slot-0 done" data-position="11" role="gridcell">
-            <form method="post" class="cell-form" data-position="11" action="/b/hostbingo-pa-lantmateri/square/ac2f5481-1a48-4476-bd62-c5a36a8da12e/complete">
-                <button type="submit" class="cell-button" disabled aria-pressed="true">
-                    <span class="cell-text">Tagit en sovmorgon</span>
-                        <span class="stamp" aria-label="Avklarad">✔ Klart</span>
-                </button>
-            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GYGo7TMZf5Pt3XlFY2a1iXsGoWgkA966RcIaj4c82PTs_qroJEWKhoV30rKElMIFQvCeqhkPce3v517bObY8sfMJOIolbnbE8_ubInUeMZQwKkcaaQf9Mpro2Z2KamQocQF9Mb0Dr-XvcDUtdYCitFyepXIqcivZmut2NZTUW3L-thGvCMBgwvC-JQcyGcuCg" /></form>
-
-        </div>
-        <div class="cell slot-0 done" data-position="12" role="gridcell">
-            <form method="post" class="cell-form" data-position="12" action="/b/hostbingo-pa-lantmateri/square/9c9d5976-185c-4644-9797-affc180a4399/complete">
-                <button type="submit" class="cell-button" disabled aria-pressed="true">
-                    <span class="cell-text">Lagat min favoritmat</span>
-                        <span class="stamp" aria-label="Avklarad">✔ Klart</span>
-                </button>
-            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GYGo7TMZf5Pt3XlFY2a1iXsGoWgkA966RcIaj4c82PTs_qroJEWKhoV30rKElMIFQvCeqhkPce3v517bObY8sfMJOIolbnbE8_ubInUeMZQwKkcaaQf9Mpro2Z2KamQocQF9Mb0Dr-XvcDUtdYCitFyepXIqcivZmut2NZTUW3L-thGvCMBgwvC-JQcyGcuCg" /></form>
-
-        </div>
-        <div class="cell slot-1 done" data-position="13" role="gridcell">
-            <form method="post" class="cell-form" data-position="13" action="/b/hostbingo-pa-lantmateri/square/0fe2ceeb-dc91-46cf-8564-50e133bc9ea0/complete">
-                <button type="submit" class="cell-button" disabled aria-pressed="true">
-                    <span class="cell-text">Skrivit ner mina tre b&#xE4;sta egenskaper</span>
-                        <span class="stamp" aria-label="Avklarad">✔ Klart</span>
-                </button>
-            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GYGo7TMZf5Pt3XlFY2a1iXsGoWgkA966RcIaj4c82PTs_qroJEWKhoV30rKElMIFQvCeqhkPce3v517bObY8sfMJOIolbnbE8_ubInUeMZQwKkcaaQf9Mpro2Z2KamQocQF9Mb0Dr-XvcDUtdYCitFyepXIqcivZmut2NZTUW3L-thGvCMBgwvC-JQcyGcuCg" /></form>
-
-        </div>
-        <div class="cell slot-0 done" data-position="14" role="gridcell">
-            <form method="post" class="cell-form" data-position="14" action="/b/hostbingo-pa-lantmateri/square/b0ca89ed-08dc-4e43-a664-0d036e93c08f/complete">
-                <button type="submit" class="cell-button" disabled aria-pressed="true">
-                    <span class="cell-text">Sovit sju timmar i str&#xE4;ck</span>
-                        <span class="stamp" aria-label="Avklarad">✔ Klart</span>
-                </button>
-            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GYGo7TMZf5Pt3XlFY2a1iXsGoWgkA966RcIaj4c82PTs_qroJEWKhoV30rKElMIFQvCeqhkPce3v517bObY8sfMJOIolbnbE8_ubInUeMZQwKkcaaQf9Mpro2Z2KamQocQF9Mb0Dr-XvcDUtdYCitFyepXIqcivZmut2NZTUW3L-thGvCMBgwvC-JQcyGcuCg" /></form>
-
-        </div>
-        <div class="cell slot-1" data-position="15" role="gridcell">
-            <form method="post" class="cell-form" data-position="15" action="/b/hostbingo-pa-lantmateri/square/fe616894-c4eb-445c-b19a-c4f504559d46/complete">
-                <button type="submit" class="cell-button" disabled aria-pressed="false">
-                    <span class="cell-text">Bestigit Br&#xE4;ntis eller annat berg</span>
-                </button>
-            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GYGo7TMZf5Pt3XlFY2a1iXsGoWgkA966RcIaj4c82PTs_qroJEWKhoV30rKElMIFQvCeqhkPce3v517bObY8sfMJOIolbnbE8_ubInUeMZQwKkcaaQf9Mpro2Z2KamQocQF9Mb0Dr-XvcDUtdYCitFyepXIqcivZmut2NZTUW3L-thGvCMBgwvC-JQcyGcuCg" /></form>
-
-        </div>
-        <div class="cell slot-0 done counter" data-position="16" role="gridcell">
-            <form method="post" class="cell-form" data-position="16" action="/b/hostbingo-pa-lantmateri/square/d35fdebd-bfe3-4fad-87eb-e312ae0c240f/complete">
-                <button type="submit" class="cell-button" disabled aria-pressed="true">
-                    <span class="cell-text">Gjort 10 t&#xE5;h&#xE4;vningar varje dag i minst en vecka</span>
-                        <span class="cell-count">7/7</span>
-                        <progress class="cell-progress" value="7" max="7" aria-hidden="true"></progress>
-                        <span class="stamp" aria-label="Avklarad">✔ Klart</span>
-                </button>
-            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GYGo7TMZf5Pt3XlFY2a1iXsGoWgkA966RcIaj4c82PTs_qroJEWKhoV30rKElMIFQvCeqhkPce3v517bObY8sfMJOIolbnbE8_ubInUeMZQwKkcaaQf9Mpro2Z2KamQocQF9Mb0Dr-XvcDUtdYCitFyepXIqcivZmut2NZTUW3L-thGvCMBgwvC-JQcyGcuCg" /></form>
-
-                <details class="cell-menu">
-                    <summary aria-label="Fler val för rutan">…</summary>
-                    <div class="cell-menu-panel">
-                        <strong class="cell-menu-title">Gjort 10 t&#xE5;h&#xE4;vningar varje dag i minst en vecka</strong>
-                            <p class="muted small">En avprickning per dag</p>
-                    </div>
-                </details>
-        </div>
-        <div class="cell slot-1 done" data-position="17" role="gridcell">
-            <form method="post" class="cell-form" data-position="17" action="/b/hostbingo-pa-lantmateri/square/21106c6d-3e22-4cfa-bc6b-49af4c83fdd7/complete">
-                <button type="submit" class="cell-button" disabled aria-pressed="true">
-                    <span class="cell-text">G&#xE5;tt p&#xE5; museum eller annat kulturellt evenemang</span>
-                        <span class="stamp" aria-label="Avklarad">✔ Klart</span>
-                </button>
-            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GYGo7TMZf5Pt3XlFY2a1iXsGoWgkA966RcIaj4c82PTs_qroJEWKhoV30rKElMIFQvCeqhkPce3v517bObY8sfMJOIolbnbE8_ubInUeMZQwKkcaaQf9Mpro2Z2KamQocQF9Mb0Dr-XvcDUtdYCitFyepXIqcivZmut2NZTUW3L-thGvCMBgwvC-JQcyGcuCg" /></form>
-
-        </div>
-        <div class="cell slot-1 done" data-position="18" role="gridcell">
-            <form method="post" class="cell-form" data-position="18" action="/b/hostbingo-pa-lantmateri/square/28d9baa8-bbea-47a8-8e85-0c81988e4b3b/complete">
-                <button type="submit" class="cell-button" disabled aria-pressed="true">
-                    <span class="cell-text">Bjudit hem n&#xE5;gon att se en film eller g&#xE5;tt p&#xE5; bio med n&#xE5;gon</span>
-                        <span class="stamp" aria-label="Avklarad">✔ Klart</span>
-                </button>
-            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GYGo7TMZf5Pt3XlFY2a1iXsGoWgkA966RcIaj4c82PTs_qroJEWKhoV30rKElMIFQvCeqhkPce3v517bObY8sfMJOIolbnbE8_ubInUeMZQwKkcaaQf9Mpro2Z2KamQocQF9Mb0Dr-XvcDUtdYCitFyepXIqcivZmut2NZTUW3L-thGvCMBgwvC-JQcyGcuCg" /></form>
-
-        </div>
-        <div class="cell slot-0 done" data-position="19" role="gridcell">
-            <form method="post" class="cell-form" data-position="19" action="/b/hostbingo-pa-lantmateri/square/f04681e9-ef46-41f5-9535-794a0ed4a054/complete">
-                <button type="submit" class="cell-button" disabled aria-pressed="true">
-                    <span class="cell-text">Styrketr&#xE4;nat minst 30 min</span>
-                        <span class="stamp" aria-label="Avklarad">✔ Klart</span>
-                </button>
-            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GYGo7TMZf5Pt3XlFY2a1iXsGoWgkA966RcIaj4c82PTs_qroJEWKhoV30rKElMIFQvCeqhkPce3v517bObY8sfMJOIolbnbE8_ubInUeMZQwKkcaaQf9Mpro2Z2KamQocQF9Mb0Dr-XvcDUtdYCitFyepXIqcivZmut2NZTUW3L-thGvCMBgwvC-JQcyGcuCg" /></form>
-
-        </div>
-        <div class="cell slot-1" data-position="20" role="gridcell">
-            <form method="post" class="cell-form" data-position="20" action="/b/hostbingo-pa-lantmateri/square/0190ae97-07f0-4db8-8392-c6182c3ad47e/complete">
-                <button type="submit" class="cell-button" disabled aria-pressed="false">
-                    <span class="cell-text">St&#xE5;tt upp och jobbat minst 1t per dag, i en vecka</span>
-                </button>
-            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GYGo7TMZf5Pt3XlFY2a1iXsGoWgkA966RcIaj4c82PTs_qroJEWKhoV30rKElMIFQvCeqhkPce3v517bObY8sfMJOIolbnbE8_ubInUeMZQwKkcaaQf9Mpro2Z2KamQocQF9Mb0Dr-XvcDUtdYCitFyepXIqcivZmut2NZTUW3L-thGvCMBgwvC-JQcyGcuCg" /></form>
-
-        </div>
-        <div class="cell slot-0 suggested" data-position="21" role="gridcell">
-            <form method="post" class="cell-form" data-position="21" action="/b/hostbingo-pa-lantmateri/square/bd5cc9a9-63cc-441c-adea-5a78783cc794/complete">
-                <button type="submit" class="cell-button" disabled aria-pressed="false">
-                    <span class="cell-text">Gjort en utflykt till skogen</span>
-                </button>
-            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GYGo7TMZf5Pt3XlFY2a1iXsGoWgkA966RcIaj4c82PTs_qroJEWKhoV30rKElMIFQvCeqhkPce3v517bObY8sfMJOIolbnbE8_ubInUeMZQwKkcaaQf9Mpro2Z2KamQocQF9Mb0Dr-XvcDUtdYCitFyepXIqcivZmut2NZTUW3L-thGvCMBgwvC-JQcyGcuCg" /></form>
-
-        </div>
-        <div class="cell slot-1" data-position="22" role="gridcell">
-            <form method="post" class="cell-form" data-position="22" action="/b/hostbingo-pa-lantmateri/square/35cab1b4-60bb-4e45-960a-aab20a56b3f7/complete">
-                <button type="submit" class="cell-button" disabled aria-pressed="false">
-                    <span class="cell-text">Skickat ett handskrivet brev till n&#xE5;gon</span>
-                </button>
-            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GYGo7TMZf5Pt3XlFY2a1iXsGoWgkA966RcIaj4c82PTs_qroJEWKhoV30rKElMIFQvCeqhkPce3v517bObY8sfMJOIolbnbE8_ubInUeMZQwKkcaaQf9Mpro2Z2KamQocQF9Mb0Dr-XvcDUtdYCitFyepXIqcivZmut2NZTUW3L-thGvCMBgwvC-JQcyGcuCg" /></form>
-
-        </div>
-        <div class="cell slot-0" data-position="23" role="gridcell">
-            <form method="post" class="cell-form" data-position="23" action="/b/hostbingo-pa-lantmateri/square/67792667-adb2-40b9-b4ae-13576aa6bb26/complete">
-                <button type="submit" class="cell-button" disabled aria-pressed="false">
-                    <span class="cell-text">Spelat s&#xE4;llskapsspel</span>
-                </button>
-            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GYGo7TMZf5Pt3XlFY2a1iXsGoWgkA966RcIaj4c82PTs_qroJEWKhoV30rKElMIFQvCeqhkPce3v517bObY8sfMJOIolbnbE8_ubInUeMZQwKkcaaQf9Mpro2Z2KamQocQF9Mb0Dr-XvcDUtdYCitFyepXIqcivZmut2NZTUW3L-thGvCMBgwvC-JQcyGcuCg" /></form>
-
-        </div>
-        <div class="cell slot-0 done" data-position="24" role="gridcell">
-            <form method="post" class="cell-form" data-position="24" action="/b/hostbingo-pa-lantmateri/square/20e9039b-9a8e-4cd8-a529-81ee8c9f9782/complete">
-                <button type="submit" class="cell-button" disabled aria-pressed="true">
-                    <span class="cell-text">Motionerat minst 30 min</span>
-                        <span class="stamp" aria-label="Avklarad">✔ Klart</span>
-                </button>
-            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GYGo7TMZf5Pt3XlFY2a1iXsGoWgkA966RcIaj4c82PTs_qroJEWKhoV30rKElMIFQvCeqhkPce3v517bObY8sfMJOIolbnbE8_ubInUeMZQwKkcaaQf9Mpro2Z2KamQocQF9Mb0Dr-XvcDUtdYCitFyepXIqcivZmut2NZTUW3L-thGvCMBgwvC-JQcyGcuCg" /></form>
-
-        </div>
-        <div class="cell slot-1 done" data-position="25" role="gridcell">
-            <form method="post" class="cell-form" data-position="25" action="/b/hostbingo-pa-lantmateri/square/54e165b3-e733-4ff9-a22f-8ba46fc6c047/complete">
-                <button type="submit" class="cell-button" disabled aria-pressed="true">
-                    <span class="cell-text">Sk&#xE4;nkt en slant till v&#xE4;lg&#xF6;rande &#xE4;ndam&#xE5;l</span>
-                        <span class="stamp" aria-label="Avklarad">✔ Klart</span>
-                </button>
-            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GYGo7TMZf5Pt3XlFY2a1iXsGoWgkA966RcIaj4c82PTs_qroJEWKhoV30rKElMIFQvCeqhkPce3v517bObY8sfMJOIolbnbE8_ubInUeMZQwKkcaaQf9Mpro2Z2KamQocQF9Mb0Dr-XvcDUtdYCitFyepXIqcivZmut2NZTUW3L-thGvCMBgwvC-JQcyGcuCg" /></form>
-
-        </div>
-        <div class="cell slot-0 done" data-position="26" role="gridcell">
-            <form method="post" class="cell-form" data-position="26" action="/b/hostbingo-pa-lantmateri/square/6459bab3-3346-42be-ac4d-5cbc9b082d3c/complete">
-                <button type="submit" class="cell-button" disabled aria-pressed="true">
-                    <span class="cell-text">Gjort minst 50 benb&#xF6;j eller utfall</span>
-                        <span class="stamp" aria-label="Avklarad">✔ Klart</span>
-                </button>
-            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GYGo7TMZf5Pt3XlFY2a1iXsGoWgkA966RcIaj4c82PTs_qroJEWKhoV30rKElMIFQvCeqhkPce3v517bObY8sfMJOIolbnbE8_ubInUeMZQwKkcaaQf9Mpro2Z2KamQocQF9Mb0Dr-XvcDUtdYCitFyepXIqcivZmut2NZTUW3L-thGvCMBgwvC-JQcyGcuCg" /></form>
-
-        </div>
-        <div class="cell slot-1" data-position="27" role="gridcell">
-            <form method="post" class="cell-form" data-position="27" action="/b/hostbingo-pa-lantmateri/square/9fffae66-5fdc-40be-97f2-ed01f58b2928/complete">
-                <button type="submit" class="cell-button" disabled aria-pressed="false">
-                    <span class="cell-text">Varit med p&#xE5; pinngympa minst en g&#xE5;ng</span>
-                </button>
-            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GYGo7TMZf5Pt3XlFY2a1iXsGoWgkA966RcIaj4c82PTs_qroJEWKhoV30rKElMIFQvCeqhkPce3v517bObY8sfMJOIolbnbE8_ubInUeMZQwKkcaaQf9Mpro2Z2KamQocQF9Mb0Dr-XvcDUtdYCitFyepXIqcivZmut2NZTUW3L-thGvCMBgwvC-JQcyGcuCg" /></form>
-
-        </div>
-        <div class="cell slot-0 done" data-position="28" role="gridcell">
-            <form method="post" class="cell-form" data-position="28" action="/b/hostbingo-pa-lantmateri/square/008f24fe-4426-4ec1-ba6c-250f1a15c444/complete">
-                <button type="submit" class="cell-button" disabled aria-pressed="true">
-                    <span class="cell-text">Nyttjat mitt friskv&#xE5;rdsbidrag</span>
-                        <span class="stamp" aria-label="Avklarad">✔ Klart</span>
-                </button>
-            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GYGo7TMZf5Pt3XlFY2a1iXsGoWgkA966RcIaj4c82PTs_qroJEWKhoV30rKElMIFQvCeqhkPce3v517bObY8sfMJOIolbnbE8_ubInUeMZQwKkcaaQf9Mpro2Z2KamQocQF9Mb0Dr-XvcDUtdYCitFyepXIqcivZmut2NZTUW3L-thGvCMBgwvC-JQcyGcuCg" /></form>
-
-        </div>
-        <div class="cell slot-1 done" data-position="29" role="gridcell">
-            <form method="post" class="cell-form" data-position="29" action="/b/hostbingo-pa-lantmateri/square/0e4f7f21-05b0-4ecb-b03d-527ddb67c203/complete">
-                <button type="submit" class="cell-button" disabled aria-pressed="true">
-                    <span class="cell-text">Skrivit ner tre saker du &#xE4;r tacksam &#xF6;ver</span>
-                        <span class="stamp" aria-label="Avklarad">✔ Klart</span>
-                </button>
-            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GYGo7TMZf5Pt3XlFY2a1iXsGoWgkA966RcIaj4c82PTs_qroJEWKhoV30rKElMIFQvCeqhkPce3v517bObY8sfMJOIolbnbE8_ubInUeMZQwKkcaaQf9Mpro2Z2KamQocQF9Mb0Dr-XvcDUtdYCitFyepXIqcivZmut2NZTUW3L-thGvCMBgwvC-JQcyGcuCg" /></form>
-
-        </div>
-        <div class="cell slot-1" data-position="30" role="gridcell">
-            <form method="post" class="cell-form" data-position="30" action="/b/hostbingo-pa-lantmateri/square/7f14a2a4-ee06-4cdc-bb4e-5d5cac6405d1/complete">
-                <button type="submit" class="cell-button" disabled aria-pressed="false">
-                    <span class="cell-text">Planterat om v&#xE4;xter, jobbat i tr&#xE4;dg&#xE5;rden</span>
-                </button>
-            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GYGo7TMZf5Pt3XlFY2a1iXsGoWgkA966RcIaj4c82PTs_qroJEWKhoV30rKElMIFQvCeqhkPce3v517bObY8sfMJOIolbnbE8_ubInUeMZQwKkcaaQf9Mpro2Z2KamQocQF9Mb0Dr-XvcDUtdYCitFyepXIqcivZmut2NZTUW3L-thGvCMBgwvC-JQcyGcuCg" /></form>
-
-        </div>
-        <div class="cell slot-0 done" data-position="31" role="gridcell">
-            <form method="post" class="cell-form" data-position="31" action="/b/hostbingo-pa-lantmateri/square/835ef0ec-c175-4d5d-8093-df7e9f856024/complete">
-                <button type="submit" class="cell-button" disabled aria-pressed="true">
-                    <span class="cell-text">Hj&#xE4;lpt en fr&#xE4;mling</span>
-                        <span class="stamp" aria-label="Avklarad">✔ Klart</span>
-                </button>
-            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GYGo7TMZf5Pt3XlFY2a1iXsGoWgkA966RcIaj4c82PTs_qroJEWKhoV30rKElMIFQvCeqhkPce3v517bObY8sfMJOIolbnbE8_ubInUeMZQwKkcaaQf9Mpro2Z2KamQocQF9Mb0Dr-XvcDUtdYCitFyepXIqcivZmut2NZTUW3L-thGvCMBgwvC-JQcyGcuCg" /></form>
-
-        </div>
-        <div class="cell slot-1" data-position="32" role="gridcell">
-            <form method="post" class="cell-form" data-position="32" action="/b/hostbingo-pa-lantmateri/square/38ef545f-06c2-425a-bf21-456d6924cfed/complete">
-                <button type="submit" class="cell-button" disabled aria-pressed="false">
-                    <span class="cell-text">Provat en ny tr&#xE4;ningsform</span>
-                </button>
-            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GYGo7TMZf5Pt3XlFY2a1iXsGoWgkA966RcIaj4c82PTs_qroJEWKhoV30rKElMIFQvCeqhkPce3v517bObY8sfMJOIolbnbE8_ubInUeMZQwKkcaaQf9Mpro2Z2KamQocQF9Mb0Dr-XvcDUtdYCitFyepXIqcivZmut2NZTUW3L-thGvCMBgwvC-JQcyGcuCg" /></form>
-
-        </div>
-        <div class="cell slot-0 done" data-position="33" role="gridcell">
-            <form method="post" class="cell-form" data-position="33" action="/b/hostbingo-pa-lantmateri/square/485f3cf4-90b0-40ec-a0bd-1a777a166c38/complete">
-                <button type="submit" class="cell-button" disabled aria-pressed="true">
-                    <span class="cell-text">Fr&#xE5;gat en kollega hur hen m&#xE5;r</span>
-                        <span class="stamp" aria-label="Avklarad">✔ Klart</span>
-                </button>
-            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GYGo7TMZf5Pt3XlFY2a1iXsGoWgkA966RcIaj4c82PTs_qroJEWKhoV30rKElMIFQvCeqhkPce3v517bObY8sfMJOIolbnbE8_ubInUeMZQwKkcaaQf9Mpro2Z2KamQocQF9Mb0Dr-XvcDUtdYCitFyepXIqcivZmut2NZTUW3L-thGvCMBgwvC-JQcyGcuCg" /></form>
-
-        </div>
-        <div class="cell slot-1 done" data-position="34" role="gridcell">
-            <form method="post" class="cell-form" data-position="34" action="/b/hostbingo-pa-lantmateri/square/4c08d415-daf5-42df-85be-7ea62ad2f381/complete">
-                <button type="submit" class="cell-button" disabled aria-pressed="true">
-                    <span class="cell-text">Tagit en paus och gjort 10 axelrullningar</span>
-                        <span class="stamp" aria-label="Avklarad">✔ Klart</span>
-                </button>
-            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GYGo7TMZf5Pt3XlFY2a1iXsGoWgkA966RcIaj4c82PTs_qroJEWKhoV30rKElMIFQvCeqhkPce3v517bObY8sfMJOIolbnbE8_ubInUeMZQwKkcaaQf9Mpro2Z2KamQocQF9Mb0Dr-XvcDUtdYCitFyepXIqcivZmut2NZTUW3L-thGvCMBgwvC-JQcyGcuCg" /></form>
-
-        </div>
-        <div class="cell slot-0 done" data-position="35" role="gridcell">
-            <form method="post" class="cell-form" data-position="35" action="/b/hostbingo-pa-lantmateri/square/e45c3e95-da5c-4674-a9ac-bff44326c664/complete">
-                <button type="submit" class="cell-button" disabled aria-pressed="true">
-                    <span class="cell-text">L&#xE4;rt mig n&#xE5;gonting om skogen</span>
-                        <span class="stamp" aria-label="Avklarad">✔ Klart</span>
-                </button>
-            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GYGo7TMZf5Pt3XlFY2a1iXsGoWgkA966RcIaj4c82PTs_qroJEWKhoV30rKElMIFQvCeqhkPce3v517bObY8sfMJOIolbnbE8_ubInUeMZQwKkcaaQf9Mpro2Z2KamQocQF9Mb0Dr-XvcDUtdYCitFyepXIqcivZmut2NZTUW3L-thGvCMBgwvC-JQcyGcuCg" /></form>
-
-        </div>
-</div>
-</div>
-<p class="board-scroll-hint muted small">Nyp för att zooma in på en ruta.</p>
-
-    </div>
-
-
-    <p class="fine-print">Hederssystem — precis som pappret. Tryck på en ruta när du gjort saken. Klicka på <strong>…</strong> i en ruta för att ångra.
-        Något som är trasigt eller kan bli bättre? <a href="/tyck-till?kind=Bug&amp;from=%2Fb%2Fhostbingo-pa-lantmateri">Tyck till</a>.</p>
+<div class="stats">
+✅ Klara aktiviteter:
+<span id="count">0</span> / 36
+&nbsp;&nbsp;|&nbsp;&nbsp;
+🏆 Bingor:
+<span id="bingocount">0</span>
 </div>
 
+<div id="board" class="grid"></div>
 
-    </main>
+<div id="message"></div>
 
-    <footer class="site-footer">
-        <span>Hälsobingo</span>
-        <span aria-hidden="true">·</span>
-        <a href="/admin">Admin</a>
-    </footer>
+<div class="footer">
 
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.9.3/confetti.browser.min.js"></script>
-    <script src="/js/celebrate.js?v=gLu0XfSsqTMK2MO4NdKkO6dkzVgHC2_RzMga6BvhWEk"></script>
-    <script src="/js/board.js?v=8hDsC5mppEsFCYh0WbV_oVoO-5chZvPHXMHE54mfHRg"></script>
+<p><strong>15 okt - 15 nov</strong> - Kryssa rutor. Har du kryssat alla rutor på en hel rad eller kolumn har du fått BINGO.</p>
 
-<script src="https://medusa.osmium.se/portal/metimur/m.js" data-app-id="halsobingo" data-endpoint="https://medusa.osmium.se/portal/metimur/collect" defer></script></body>
+<button onclick="resetBoard()">
+Återställ bingobricka
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+const activities = [
+
+["Dricka en kopp kaffe/the i skogen","beige"],
+["Gå en långpromenad minst 60 min","gray"],
+["Läsa en bok","beige"],
+["Träna ett pass i källargymmet","gray"],
+["Fika med en vän","beige"],
+["Gå och lägga sig senast 21.30","gray"],
+
+["Skriva ner en sak du är tacksam för varje dag under en vecka","gray"],
+["Ta sovmorgon","beige"],
+["Dansa till en bra låt","gray"],
+["Testa en (för dig) ny träningsform","beige"],
+["Basta","gray"],
+["Laga ett nytt vegetariskt recept","beige"],
+
+["Bestiga Bräntis eller annat berg","beige"],
+["Skriv ner dina tre bästa egenskaper","gray"],
+["Ta ett dopp i kallt vatten/kall dusch","beige"],
+["10 axelrullningar","gray"],
+["Se en film","beige"],
+["Promenera Bölesholmarna runt en lunch","gray"],
+
+["Sitta ute 15 min utan telefon/musik/bok","gray"],
+["Ge någon massage","beige"],
+["Göra något pulshöjande med en kollega","gray"],
+["Göra 50 knäböj","beige"],
+["15 min stretching under arbetsdagen","gray"],
+["Ta fem djupa andetag när du känner dig stressad","beige"],
+
+["Skänka en slant till välgörenhet","beige"],
+["Äta minst två färgrika grönsaker till en måltid","gray"],
+["Hjälpa en främling","beige"],
+["Ge positiv feedback till en familjemedlem eller vän","gray"],
+["Gå minst 10 000 steg 3 dagar under en vecka","beige"],
+["Ta en promenad en väg du inte gått tidigare","gray"],
+
+["Min valfria hälsoaktivitet","gray"],
+["Nyttja friskvårdsbidraget","beige"],
+["Gå upp för trapporna till kontoret under en hel vecka","gray"],
+["Ta en power nap","beige"],
+["Äta frukost i lugn och ro utan skärmar","gray"],
+["Stå upp och jobba minst en timme per dag i en vecka","beige"]
+
+];
+
+const STORAGE_KEY = "detaljplanering_bingo";
+let checked = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+const board = document.getElementById("board");
+
+activities.forEach((item,index)=>{
+
+    const div = document.createElement("div");
+
+    div.className = `cell ${item[1]}`;
+    div.innerHTML = item[0];
+
+    if(checked.includes(index)){
+        div.classList.add("completed");
+    }
+
+    div.addEventListener("click",()=>{
+
+        div.classList.toggle("completed");
+
+        if(div.classList.contains("completed")){
+            if(!checked.includes(index)){
+                checked.push(index);
+            }
+        }else{
+            checked = checked.filter(v => v !== index);
+        }
+
+        localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(checked)
+        );
+
+        updateStats();
+
+    });
+
+    board.appendChild(div);
+
+});
+
+function updateStats(){
+
+    document.getElementById("count").innerText =
+        checked.length;
+
+    checkBingo();
+
+}
+
+function checkBingo(){
+
+    const cells =
+        [...document.querySelectorAll(".cell")];
+
+    cells.forEach(c=>c.classList.remove("bingo"));
+
+    let bingoCount = 0;
+
+    for(let row=0; row<6; row++){
+
+        let complete = true;
+
+        for(let col=0; col<6; col++){
+
+            const index = row*6 + col;
+
+            if(!cells[index].classList.contains("completed")){
+                complete = false;
+            }
+
+        }
+
+        if(complete){
+
+            bingoCount++;
+
+            for(let col=0; col<6; col++){
+
+                cells[row*6+col]
+                    .classList.add("bingo");
+
+            }
+        }
+    }
+
+    for(let col=0; col<6; col++){
+
+        let complete = true;
+
+        for(let row=0; row<6; row++){
+
+            const index = row*6 + col;
+
+            if(!cells[index].classList.contains("completed")){
+                complete = false;
+            }
+
+        }
+
+        if(complete){
+
+            bingoCount++;
+
+            for(let row=0; row<6; row++){
+
+                cells[row*6+col]
+                    .classList.add("bingo");
+
+            }
+        }
+    }
+
+    document.getElementById("bingocount")
+        .innerText = bingoCount;
+
+    document.getElementById("message").innerHTML =
+        bingoCount > 0 ? "🎉 BINGO! 🎉" : "";
+
+}
+
+function resetBoard(){
+
+    if(confirm("Vill du återställa bingobrickan?")){
+
+        localStorage.removeItem(STORAGE_KEY);
+
+        location.reload();
+    }
+
+}
+
+updateStats();
+
+</script>
+
+</body>
 </html>
