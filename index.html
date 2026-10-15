@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Hälsobingo Detaljplanering 2026</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    background:#ececec;
+    margin:0;
+    padding:20px;
+}
+
+.container{
+    max-width:1400px;
+    margin:auto;
+}
+
+h1{
+    text-align:center;
+    font-size:54px;
+    font-weight:400;
+    margin-bottom:25px;
+}
+
+.stats{
+    text-align:center;
+    font-size:20px;
+    margin-bottom:15px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:0;
+    border:2px solid #d9b178;
+}
+
+.cell{
+    aspect-ratio:1/1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:12px;
+    font-size:18px;
+    line-height:1.2;
+    cursor:pointer;
+    border:2px solid #d9b178;
+    transition:.2s;
+    user-select:none;
+}
+
+.beige{
+    background:#ead2b2;
+}
+
+.gray{
+    background:#f4f4f4;
+}
+
+.completed{
+    border:6px solid #0b8d33 !important;
+    background:#ffffff !important;
+    font-weight:bold;
+}
+
+.bingo{
+    border:6px solid #c01749 !important;
+}
+
+.footer{
+    margin-top:20px;
+    font-size:22px;
+}
+
+button{
+    background:#007c2e;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    margin-top:20px;
+    cursor:pointer;
+    border-radius:8px;
+    font-size:16px;
+}
+
+button:hover{
+    background:#005e22;
+}
+
+#message{
+    text-align:center;
+    color:#0b8d33;
+    font-size:32px;
+    font-weight:bold;
+    margin-top:20px;
+}
+
+@media(max-width:1200px){
+
+    .cell{
+        font-size:14px;
+    }
+
+    h1{
+        font-size:32px;
+    }
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>HÄLSOBINGO DETALJPLANERING 2026</h1>
+
+<div class="stats">
+✅ Klara aktiviteter:
+<span id="count">0</span> / 36
+&nbsp;&nbsp;|&nbsp;&nbsp;
+🏆 Bingor:
+<span id="bingocount">0</span>
+</div>
+
+<div id="board" class="grid"></div>
+
+<div id="message"></div>
+
+<div class="footer">
+
+<p><strong>15 okt - 15 nov</strong> - Kryssa rutor. Har du kryssat alla rutor på en hel rad eller kolumn har du fått BINGO.</p>
+
+<button onclick="resetBoard()">
+Återställ bingobricka
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+const activities = [
+
+["Dricka en kopp kaffe/the i skogen","beige"],
+["Gå en långpromenad minst 60 min","gray"],
+["Läsa en bok","beige"],
+["Träna ett pass i källargymmet","gray"],
+["Fika med en vän","beige"],
+["Gå och lägga sig senast 21.30","gray"],
+
+["Skriva ner en sak du är tacksam för varje dag under en vecka","gray"],
+["Ta sovmorgon","beige"],
+["Dansa till en bra låt","gray"],
+["Testa en (för dig) ny träningsform","beige"],
+["Basta","gray"],
+["Laga ett nytt vegetariskt recept","beige"],
+
+["Bestiga Bräntis eller annat berg","beige"],
+["Skriv ner dina tre bästa egenskaper","gray"],
+["Ta ett dopp i kallt vatten/kall dusch","beige"],
+["10 axelrullningar","gray"],
+["Se en film","beige"],
+["Promenera Bölesholmarna runt en lunch","gray"],
+
+["Sitta ute 15 min utan telefon/musik/bok","gray"],
+["Ge någon massage","beige"],
+["Göra något pulshöjande med en kollega","gray"],
+["Göra 50 knäböj","beige"],
+["15 min stretching under arbetsdagen","gray"],
+["Ta fem djupa andetag när du känner dig stressad","beige"],
+
+["Skänka en slant till välgörenhet","beige"],
+["Äta minst två färgrika grönsaker till en måltid","gray"],
+["Hjälpa en främling","beige"],
+["Ge positiv feedback till en familjemedlem eller vän","gray"],
+["Gå minst 10 000 steg 3 dagar under en vecka","beige"],
+["Ta en promenad en väg du inte gått tidigare","gray"],
+
+["Min valfria hälsoaktivitet","gray"],
+["Nyttja friskvårdsbidraget","beige"],
+["Gå upp för trapporna till kontoret under en hel vecka","gray"],
+["Ta en power nap","beige"],
+["Äta frukost i lugn och ro utan skärmar","gray"],
+["Stå upp och jobba minst en timme per dag i en vecka","beige"]
+
+];
+
+const STORAGE_KEY = "detaljplanering_bingo";
+let checked = [];
+
+try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    checked = stored ? JSON.parse(stored) : [];
+} catch (error) {
+    checked = [];
+}
+
+const board = document.getElementById("board");
+
+activities.forEach((item,index)=>{
+
+    const div = document.createElement("div");
+
+    div.className = `cell ${item[1]}`;
+    div.innerHTML = item[0];
+
+    if(checked.includes(index)){
+        div.classList.add("completed");
+    }
+
+    div.addEventListener("click",()=>{
+
+        div.classList.toggle("completed");
+
+        if(div.classList.contains("completed")){
+            if(!checked.includes(index)){
+                checked.push(index);
+            }
+        }else{
+            checked = checked.filter(v => v !== index);
+        }
+
+        try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(checked));
+        } catch (error) {
+            // Ignore storage errors (e.g. privacy mode)
+        }
+
+        updateStats();
+
+    });
+
+    board.appendChild(div);
+
+});
+
+function updateStats(){
+
+    document.getElementById("count").innerText = checked.length;
+
+    checkBingo();
+
+}
+
+function checkBingo(){
+
+    const cells = [...document.querySelectorAll(".cell")];
+
+    cells.forEach(c=>c.classList.remove("bingo"));
+
+    let bingoCount = 0;
+
+    for(let row=0; row<6; row++){
+
+        let complete = true;
+
+        for(let col=0; col<6; col++){
+
+            const index = row*6 + col;
+
+            if(!cells[index].classList.contains("completed")){
+                complete = false;
+            }
+
+        }
+
+        if(complete){
+
+            bingoCount++;
+
+            for(let col=0; col<6; col++){
+
+                cells[row*6+col].classList.add("bingo");
+
+            }
+        }
+    }
+
+    for(let col=0; col<6; col++){
+
+        let complete = true;
+
+        for(let row=0; row<6; row++){
+
+            const index = row*6 + col;
+
+            if(!cells[index].classList.contains("completed")){
+                complete = false;
+            }
+
+        }
+
+        if(complete){
+
+            bingoCount++;
+
+            for(let row=0; row<6; row++){
+
+                cells[row*6+col].classList.add("bingo");
+
+            }
+        }
+    }
+
+    document.getElementById("bingocount").innerText = bingoCount;
+
+    document.getElementById("message").innerHTML = bingoCount > 0 ? "🎉 BINGO! 🎉" : "";
+
+}
+
+function resetBoard(){
+
+    if(confirm("Vill du återställa bingobrickan?")){
+
+        try {
+            localStorage.removeItem(STORAGE_KEY);
+        } catch (error) {
+            // Ignore storage errors
+        }
+
+        location.reload();
+    }
+
+}
+
+updateStats();
+
+</script>
+
+</body>
+</html>
