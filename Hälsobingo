@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Hälsobingo Detaljplanering 2026</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#efefef;
+    margin:0;
+    padding:20px;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+}
+
+h1{
+    text-align:center;
+    font-size:48px;
+    margin-bottom:20px;
+}
+
+.stats{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    margin-bottom:20px;
+    font-weight:bold;
+    font-size:18px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:4px;
+}
+
+.cell{
+    background:#e9d2b4;
+    border:2px solid #d9b07a;
+    min-height:120px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:10px;
+    font-size:15px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.cell:nth-child(even){
+    background:#f6f6f6;
+}
+
+.cell:hover{
+    transform:scale(1.02);
+}
+
+.completed{
+    background:#dff5df !important;
+    border:5px solid #008a28 !important;
+    font-weight:bold;
+}
+
+.bingo{
+    border:5px solid #c31444 !important;
+}
+
+.footer{
+    margin-top:30px;
+    font-size:18px;
+}
+
+button{
+    background:#007a2f;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    cursor:pointer;
+    border-radius:6px;
+    font-size:16px;
+}
+
+button:hover{
+    background:#005f24;
+}
+
+#message{
+    text-align:center;
+    font-size:28px;
+    color:#008a28;
+    margin-top:20px;
+    font-weight:bold;
+}
+
+@media(max-width:900px){
+
+.grid{
+    grid-template-columns:repeat(2,1fr);
+}
+
+.cell{
+    min-height:100px;
+}
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>HÄLSOBINGO DETALJPLANERING 2026</h1>
+
+<div class="stats">
+    <div>✅ Klara aktiviteter: <span id="count">0</span>/36</div>
+    <div>🏆 Bingor: <span id="bingocount">0</span></div>
+</div>
+
+<div class="grid" id="board"></div>
+
+<div id="message"></div>
+
+<div class="footer">
+    <p>
+        <strong>15 okt - 15 nov</strong> -
+        Kryssa rutor, har du kryssat alla rutor på både lod- och vågrät rad har du fått BINGO.
+    </p>
+
+    <br>
+
+    <button onclick="resetBoard()">Återställ bingobricka</button>
+</div>
+
+</div>
+
+<script>
+
+const activities = [
+
+"Dricka en kopp kaffe/the i skogen",
+"Gå en långpromenad minst 60 min",
+"Läsa en bok",
+"Träna ett pass i källargymmet",
+"Fika med en vän",
+"Gå och lägga sig senast 21.30",
+
+"Skriva ner en sak du är tacksam för varje dag under en vecka",
+"Ta sovmorgon",
+"Dansa till en bra låt",
+"Testa en (för dig) ny träningsform",
+"Basta",
+"Laga ett nytt vegetariskt recept",
+
+"Bestiga Bräntis eller annat berg",
+"Skriv ner dina tre bästa egenskaper",
+"Ta ett dopp i kallt vatten/kall dusch",
+"10 axelrullningar",
+"Se en film",
+"Promenera Bölesholmarna runt en lunch",
+
+"Sitta ute 15 min utan telefon/musik/bok",
+"Ge någon massage",
+"Göra något pulshöjande med en kollega",
+"Göra 50 knäböj",
+"15 min stretching under arbetsdagen",
+"Ta fem djupa andetag när du känner dig stressad",
+
+"Skänka en slant till välgörenhet",
+"Äta minst två färgrika grönsaker till en måltid",
+"Hjälpa en främling",
+"Ge positiv feedback till en familjemedlem eller vän",
+"Gå minst 10 000 steg 3 dagar under en vecka",
+"Ta en promenad en väg du inte gått tidigare",
+
+"Min valfria hälsoaktivitet",
+"Nyttja friskvårdsbidraget",
+"Gå upp för trapporna till kontoret under en hel vecka",
+"Ta en power nap",
+"Äta frukost i lugn och ro utan skärmar",
+"Stå upp och jobba minst en timme per dag i en vecka"
+
+];
+
+const board = document.getElementById("board");
+const STORAGE_KEY="halsobingo2026";
+
+let selected =
+JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+activities.forEach((activity,index)=>{
+
+    const cell=document.createElement("div");
+    cell.className="cell";
+    cell.innerHTML=activity;
+
+    if(selected.includes(index))
+        cell.classList.add("completed");
+
+    cell.onclick=()=>{
+
+        cell.classList.toggle("completed");
+
+        if(cell.classList.contains("completed")){
+            if(!selected.includes(index))
+                selected.push(index);
+        }else{
+            selected=selected.filter(i=>i!==index);
+        }
+
+        localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(selected)
+        );
+
+        updateStats();
+    };
+
+    board.appendChild(cell);
+
+});
+
+function updateStats(){
+
+    document.getElementById("count")
+        .innerText=selected.length;
+
+    checkBingo();
+}
+
+function checkBingo(){
+
+    const cells=[...document.querySelectorAll(".cell")];
+
+    cells.forEach(c=>{
+        c.classList.remove("bingo");
+    });
+
+    let bingoCount=0;
+
+    for(let row=0; row<6; row++){
+
+        let win=true;
+
+        for(let col=0; col<6; col++){
+
+            const idx=row*6+col;
+
+            if(!cells[idx].classList.contains("completed")){
+                win=false;
+            }
+        }
+
+        if(win){
+
+            bingoCount++;
+
+            for(let col=0; col<6; col++){
+                cells[row*6+col]
+                    .classList.add("bingo");
+            }
+        }
+    }
+
+    for(let col=0; col<6; col++){
+
+        let win=true;
+
+        for(let row=0; row<6; row++){
+
+            const idx=row*6+col;
+
+            if(!cells[idx].classList.contains("completed")){
+                win=false;
+            }
+        }
+
+        if(win){
+
+            bingoCount++;
+
+            for(let row=0; row<6; row++){
+                cells[row*6+col]
+                    .classList.add("bingo");
+            }
+        }
+    }
+
+    document.getElementById("bingocount")
+        .innerText=bingoCount;
+
+    if(bingoCount>0){
+
+        document.getElementById("message")
+            .innerHTML="🎉 BINGO! 🎉";
+
+    }else{
+
+        document.getElementById("message")
+            .innerHTML="";
+    }
+}
+
+function resetBoard(){
+
+if(confirm("Vill du återställa hela bingobrickan?")){
+
+    localStorage.removeItem(STORAGE_KEY);
+    location.reload();
+}
+
+}
+
+updateStats();
+
+</script>
+
+</body>
+</html>
